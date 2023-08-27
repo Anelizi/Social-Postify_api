@@ -7,27 +7,27 @@ import { UpdateMediaDto } from './dto/update-media.dto';
 export class MediasController {
   constructor(private readonly mediasService: MediasService) {}
 
-  @Post('/medias')
+  @Post()
   async create(@Body() createMediaDto: CreateMediaDto) {
     return await this.mediasService.create(createMediaDto);
   }
 
-  @Get('/medias')
+  @Get()
   async findAll() {
     return await this.mediasService.findAll();
   }
 
-  @Get('/medias/:id')
+  @Get('/:id')
   async findOne(@Param('id') id: string) {
     return await this.mediasService.findOne(+id);
   }
 
-  @Put('/medias/:id')
+  @Put('/:id')
   async update(@Param('id') id: string, @Body() updateMediaDto: UpdateMediaDto) {
     return await this.mediasService.update(+id, updateMediaDto);
   }
   
-  @Delete('/medias/:id')
+  @Delete('/:id')
   async remove(@Param('id') id: string) {
     return await this.mediasService.remove(+id);
   }
