@@ -40,19 +40,16 @@ export class MediasService {
   async update(id: number, updateMediaDto: UpdateMediaDto) {
     const { title, username } = updateMediaDto;
     const media = await this.repository.findOne(id);
-    const mediaExist = await this.repository.mediaWithTitleName(
-      title,
-      username,
-    );
+    const mediaExist = await this.repository.mediaWithTitleName(title, username);
 
     if (!media) {
-      throw new NotFoundException(
-        'Mídia não encontrada, não foi possivel atualizar mídia!',
-      );
+      throw new NotFoundException('Midia não encontrada!');
     }
 
     if (mediaExist) {
-      throw new ConflictException('Essa mídia já existe!');
+      throw new ConflictException(
+        'registro com a mesma combinação de title e username já existe!',
+      );
     }
 
     return await this.repository.update(id, { title, username });
