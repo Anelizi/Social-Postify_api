@@ -28,9 +28,7 @@ export class MediasRepository {
   }
 
   findAll() {
-    // return this.prisma.media.findMany({
-    //   where: {}
-    // })
+    return this.prisma.media.findMany();
   }
 
   findOne(id: number) {
