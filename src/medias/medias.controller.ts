@@ -8,27 +8,27 @@ export class MediasController {
   constructor(private readonly mediasService: MediasService) {}
 
   @Post('/medias')
-  create(@Body() createMediaDto: CreateMediaDto) {
-    return this.mediasService.create(createMediaDto);
+  async create(@Body() createMediaDto: CreateMediaDto) {
+    return await this.mediasService.create(createMediaDto);
   }
 
   @Get('/medias')
-  findAll() {
-    return this.mediasService.findAll();
+  async findAll() {
+    return await this.mediasService.findAll();
   }
 
   @Get('/medias/:id')
-  findOne(@Param('id') id: string) {
-    return this.mediasService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    return await this.mediasService.findOne(+id);
   }
 
   @Put('/medias/:id')
-  update(@Param('id') id: string, @Body() updateMediaDto: UpdateMediaDto) {
-    return this.mediasService.update(+id, updateMediaDto);
+  async update(@Param('id') id: string, @Body() updateMediaDto: UpdateMediaDto) {
+    return await this.mediasService.update(+id, updateMediaDto);
   }
   
   @Delete('/medias/:id')
-  remove(@Param('id') id: string) {
-    return this.mediasService.remove(+id);
+  async remove(@Param('id') id: string) {
+    return await this.mediasService.remove(+id);
   }
 }
