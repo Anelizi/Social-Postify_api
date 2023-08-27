@@ -32,9 +32,9 @@ export class MediasRepository {
   }
 
   findOne(id: number) {
-    // return this.prisma.media.findFirst({
-    //   where: { id }
-    // })
+    return this.prisma.media.findFirst({
+      where: { id },
+    });
   }
 
   update(id: number, updateMediaDto: UpdateMediaDto) {
