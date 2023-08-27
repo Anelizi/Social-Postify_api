@@ -38,7 +38,10 @@ export class MediasRepository {
   }
 
   update(id: number, updateMediaDto: UpdateMediaDto) {
-    return `This action updates a #${id} media`;
+    return this.prisma.media.update({
+      where: { id },
+      data: updateMediaDto,
+    });
   }
 
   remove(id: number) {

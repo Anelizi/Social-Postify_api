@@ -1,4 +1,8 @@
-import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateMediaDto } from './dto/create-media.dto';
 import { UpdateMediaDto } from './dto/update-media.dto';
 import { MediasRepository } from './medias.repository';
@@ -12,7 +16,9 @@ export class MediasService {
     const media = await this.repository.mediaWithTitleName(title, username);
 
     if (media) {
-      throw new ConflictException('registro com a mesma combinação de title e username já existe!');
+      throw new ConflictException(
+        'registro com a mesma combinação de title e username já existe!',
+      );
     }
     return await this.repository.create(createMediaDto);
   }
@@ -27,12 +33,29 @@ export class MediasService {
     if (!media) {
       throw new NotFoundException('Midia não encontrada!');
     }
-    
+
     return media;
   }
 
   async update(id: number, updateMediaDto: UpdateMediaDto) {
-    return await this.repository.update(id, updateMediaDto);
+    const { title, username } = updateMediaDto;
+    const media = await this.repository.findOne(id);
+    const mediaExist = await this.repository.mediaWithTitleName(
+      title,
+      username,
+    );
+
+    if (!media) {
+      throw new NotFoundException(
+        'Mídia não encontrada, não foi possivel atualizar mídia!',
+      );
+    }
+
+    if (mediaExist) {
+      throw new ConflictException('Essa mídia já existe!');
+    }
+
+    return await this.repository.update(id, { title, username });
   }
 
   async remove(id: number) {

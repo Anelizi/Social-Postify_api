@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Param, Delete, Put, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Put, ParseIntPipe, HttpCode } from '@nestjs/common';
 import { MediasService } from './medias.service';
 import { CreateMediaDto } from './dto/create-media.dto';
 import { UpdateMediaDto } from './dto/update-media.dto';
+import * as httpStatus from 'http-status';
 
 @Controller('medias')
 export class MediasController {
@@ -23,7 +24,8 @@ export class MediasController {
   }
 
   @Put('/:id')
-  async update(@Param('id') id: string, @Body() updateMediaDto: UpdateMediaDto) {
+  @HttpCode(httpStatus.NO_CONTENT)
+  async update(@Param('id', ParseIntPipe) id: string, @Body() updateMediaDto: UpdateMediaDto) {
     return await this.mediasService.update(+id, updateMediaDto);
   }
   
