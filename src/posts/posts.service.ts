@@ -12,7 +12,7 @@ export class PostsService {
   }
 
   async findAll() {
-    return await `This action returns all posts`;
+    return await this.repository.findAll();
   }
 
   async findOne(id: number) {
