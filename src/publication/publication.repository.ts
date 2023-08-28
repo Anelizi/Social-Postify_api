@@ -4,7 +4,7 @@ import { CreatePublicationDto } from './dto/create-publication.dto';
 import { UpdatePublicationDto } from './dto/update-publication.dto';
 
 @Injectable()
-export class MediasRepository {
+export class PublicationRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   create(createPublicationDto: CreatePublicationDto) {
