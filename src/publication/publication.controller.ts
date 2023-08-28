@@ -7,27 +7,27 @@ import { UpdatePublicationDto } from './dto/update-publication.dto';
 export class PublicationController {
   constructor(private readonly publicationService: PublicationService) {}
 
-  @Post('/publications')
+  @Post()
   create(@Body() createPublicationDto: CreatePublicationDto) {
     return this.publicationService.create(createPublicationDto);
   }
 
-  @Get('/publications')
+  @Get()
   findAll() {
     return this.publicationService.findAll();
   }
 
-  @Get('/publications/:id')
+  @Get('/:id')
   findOne(@Param('id') id: string) {
     return this.publicationService.findOne(+id);
   }
 
-  @Put('/publications/:id')
+  @Put('/:id')
   update(@Param('id') id: string, @Body() updatePublicationDto: UpdatePublicationDto) {
     return this.publicationService.update(+id, updatePublicationDto);
   }
 
-  @Delete('/publications/:id')
+  @Delete('/:id')
   remove(@Param('id') id: string) {
     return this.publicationService.remove(+id);
   }

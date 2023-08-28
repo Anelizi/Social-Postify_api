@@ -45,15 +45,16 @@ export class MediasRepository {
   }
 
   remove(id: number) {
-    // return this.prisma.media.delete({
-    //   where: {
-    //     id,
-    //     AND:{
-    //       NOT: {
-            
-    //       }
-    //     }
-    //   }
-    // });
+    return `${id}`;
+  //   return this.prisma.media.delete({
+  //     where: {
+  //       id,
+  //       AND: {
+  //         NOT: {
+  //           Publication: { some: {} },
+  //         },
+  //       },
+  //     },
+  //   });
   }
 }
