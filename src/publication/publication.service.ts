@@ -21,18 +21,24 @@ export class PublicationService {
     ]);
 
     if(!mediaPublication || !postPublication){
-      throw new NotFoundException()
+      throw new NotFoundException('Registros não encontrados')
     }
 
     return await this.repository.create(createPublicationDto);
   }
 
-  async findAll() {
-    return `This action returns all publication`;
+  async findAll(published: boolean | null, after: string | null) {
+    return await this.repository.findAll(published, after);
   }
 
   async findOne(id: number) {
-    return `This action returns a #${id} publication`;
+    const publication = await this.repository.findOne(id);
+
+    if(!publication){
+      throw new NotFoundException('Publicação não existe!');
+    }
+
+    return publication;
   }
 
   async update(id: number, updatePublicationDto: UpdatePublicationDto) {

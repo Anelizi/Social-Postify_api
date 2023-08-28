@@ -13,8 +13,21 @@ export class PublicationRepository {
     });
   }
 
-  findAll() {
-    return this.prisma.publication.findMany();
+  findAll(published: boolean | null, after: string | null) {
+    const date = new Date();
+
+    return this.prisma.publication.findMany({
+      where:{
+        date: {
+          lt: published ? date : undefined,
+        },
+        AND: { 
+          date:{
+            gte: after ? new Date(after) : undefined
+          }
+        }
+      }
+    });
   }
 
   findOne(id: number) {
