@@ -72,6 +72,12 @@ export class PublicationService {
   }
 
   async remove(id: number) {
-    return `This action removes a #${id} publication`;
+    const publication = await this.repository.findOne(id);
+
+    if(!publication){
+      throw new NotFoundException('Publicação não existe!');
+    }
+
+    return await this.repository.remove(id);
   }
 }
