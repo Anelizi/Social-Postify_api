@@ -64,11 +64,11 @@ export class PublicationService {
       throw new NotFoundException('Registros não encontrados');
     }
 
-    if (dateupdate) {
+    if (!dateupdate) {
       throw new ForbiddenException('não é possível atualizar a data!');
     }
 
-    return await this.repository.update(id, { mediaId, postId, date });
+    return await this.repository.update(id, updatePublicationDto);
   }
 
   async remove(id: number) {

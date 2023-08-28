@@ -14,12 +14,10 @@ export class PublicationRepository {
   }
 
   findAll(published: boolean | null, after: string | null) {
-    const date = new Date();
-
     return this.prisma.publication.findMany({
       where: {
         date: {
-          lt: published ? date : undefined,
+          lt: published ? new Date() : undefined,
         },
         AND: {
           date: {
