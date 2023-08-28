@@ -54,4 +54,10 @@ export class PublicationRepository {
       where: { mediaId },
     });
   }
+
+  publicationByPostId(postId: number) {
+    return this.prisma.publication.count({
+      where: { postId },
+    });
+  }
 }
