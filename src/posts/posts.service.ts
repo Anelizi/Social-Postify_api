@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { PostsRepository } from './posts.repository';
@@ -16,7 +16,12 @@ export class PostsService {
   }
 
   async findOne(id: number) {
-    return await `This action returns a #${id} post`;
+    const post = await this.repository.findOne(id);
+
+    if(!post){
+      throw new NotFoundException('Post não encontrado!')
+    }
+    return post;
   }
 
   async update(id: number, updatePostDto: UpdatePostDto) {
