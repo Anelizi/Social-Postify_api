@@ -56,6 +56,12 @@ export class MediasService {
   }
 
   async remove(id: number) {
+    const media = await this.repository.findOne(id);
+
+    if (!media) {
+      throw new NotFoundException('Midia não encontrada!');
+    }
+    
     return await this.repository.remove(id);
   }
 }

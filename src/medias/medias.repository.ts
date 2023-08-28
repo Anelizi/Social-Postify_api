@@ -45,6 +45,15 @@ export class MediasRepository {
   }
 
   remove(id: number) {
-    return `This action removes a #${id} media`;
+    // return this.prisma.media.delete({
+    //   where: {
+    //     id,
+    //     AND:{
+    //       NOT: {
+            
+    //       }
+    //     }
+    //   }
+    // });
   }
 }
