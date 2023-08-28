@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Delete, Put, HttpCode, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Put, HttpCode, Query, ParseIntPipe } from '@nestjs/common';
 import { PublicationService } from './publication.service';
 import { CreatePublicationDto } from './dto/create-publication.dto';
 import { UpdatePublicationDto } from './dto/update-publication.dto';
@@ -19,13 +19,13 @@ export class PublicationController {
   }
 
   @Get('/:id')
-  async findOne(@Param('id') id: string) {
+  async findOne(@Param('id', ParseIntPipe) id: string) {
     return await this.publicationService.findOne(+id);
   }
 
   @Put('/:id')
   @HttpCode(httpStatus.NO_CONTENT)
-  async update(@Param('id') id: string, @Body() updatePublicationDto: UpdatePublicationDto) {
+  async update(@Param('id', ParseIntPipe) id: string, @Body() updatePublicationDto: UpdatePublicationDto) {
     return await this.publicationService.update(+id, updatePublicationDto);
   }
 
