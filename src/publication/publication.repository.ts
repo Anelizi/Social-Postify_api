@@ -17,16 +17,16 @@ export class PublicationRepository {
     const date = new Date();
 
     return this.prisma.publication.findMany({
-      where:{
+      where: {
         date: {
           lt: published ? date : undefined,
         },
-        AND: { 
-          date:{
-            gte: after ? new Date(after) : undefined
-          }
-        }
-      }
+        AND: {
+          date: {
+            gte: after ? new Date(after) : undefined,
+          },
+        },
+      },
     });
   }
 
@@ -46,6 +46,12 @@ export class PublicationRepository {
   remove(id: number) {
     return this.prisma.publication.delete({
       where: { id },
+    });
+  }
+
+  publicationByMedeaId(mediaId: number) {
+    return this.prisma.publication.count({
+      where: { mediaId },
     });
   }
 }
